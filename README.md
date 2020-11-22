@@ -1,6 +1,3 @@
-ANDROID-HACK
-adem201145
-umutkara
 AUTHOR = UMUT KARA
 
 Android Hack Aracı
