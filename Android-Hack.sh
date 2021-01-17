@@ -90,9 +90,25 @@ echo
 echo
 echo
 sleep 1
-pkg install unstable-repo -y
-pkg install metasploit -y
+apt update && apt upgrade -y
+
+pkg install wget -y && pkg install curl -y
+
+wget Auxilus.github.io/metasploit.sh
+
+bash metasploit.sh
+
+cd metasploit-framework
+
+cp msfconsole msfvenom /$PREFIX/bin
+cd ..
+
+rm -rf metasploit-framework
+
+chmod 777 $PREFIX/bin/*
+
 pkg install ruby -y
+
 gem install lolcat
 echo
 echo
