@@ -30,6 +30,23 @@ if [[ $kontrol == 0 ]];then
 	echo
 	sleep 2
 fi
+kontrol=$(which ngrok |wc -l)
+if [[ $kontrol == 0 ]];then
+	echo
+	echo
+	echo
+	printf "\e[32m[✓]\e[97m NGROK KURULUYOR"
+	echo
+	echo
+	echo
+	git clone https://github.com/termux-egitim/NGROK
+	mv NGROK/ngrok $PREFIX/bin
+	chmod 777 $PREFIX/bin/ngrok
+	rm -rf NGROK
+	echo
+	echo
+	echo
+fi
 kontrol=$(ls /sdcard |wc -m)
 if [[ $kontrol == 0 ]];then
 	termux-setup-storage
