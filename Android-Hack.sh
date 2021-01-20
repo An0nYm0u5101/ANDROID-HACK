@@ -1,28 +1,54 @@
 #!/bin/bash
-##Author=UmuT_KaRa
-clear
-B="\e[0m"
-K="\e[31m"
-Y="\e[32m"
-S="\e[33m"
-M="\e[34m"
-C="\e[36m"
-menu() {
-cd Files
+#Coded By = UmuT KaRa
+if [[ $1 == güncelle ]];then
+	cd files
+	bash güncelleme.sh güncelle
+	exit
+fi
+kontrol=$(which msfconsole |wc -l)
+if [[ $kontrol == 0 ]];then
+	echo
+	echo
+	echo
+	printf "\e[33m[*] \e[97mMETASPOLİT FRAMEWORK KURULUYOR"
+	echo
+	echo
+	echo
+	sleep 1
+	printf "\e[33m[*] \e[97mKURULUM BİRAZ UZUN SÜREBİLİR LÜTFEN BEKLEYİNİZ.."
+	echo
+	echo
+	echo
+	pkg install -y wget&&wget https://raw.githubusercontent.com/hax4us/metasploit_Termux/master/metasploit.sh&&chmod 777 metasploit.sh&&bash metasploit.sh
+	rm metasploit.sh
+	echo
+	echo
+	echo
+	printf "\e[32m[✓] \e[97mMETASPOLİT FRAMEWORK KURULUMU TAMAMLANDI"
+	echo
+	echo
+	echo
+	sleep 2
+fi
+kontrol=$(ls /sdcard |wc -m)
+if [[ $kontrol == 0 ]];then
+	termux-setup-storage
+fi
+cd files
+bash güncelleme.sh
 bash banner.sh
 printf "
 
-$B
-[\e[32m1$B]$Y TROJAN APK OLUŞTUR$B
+\e[31m[\e[97m1\e[31m]\e[97m ────────── \e[32mTROJAN APK OLUŞTUR\e[97m
 
-[\e[32m2$B]$Y DİNLEMEYE AL$B
+\e[31m[\e[97m2\e[31m]\e[97m ────────── \e[32mDİNLEMEYE AL\e[97m
 
-[\e[31mX$B]$K ÇIKIŞ$B
+\e[31m[\e[97mX\e[31m]\e[97m ────────── \e[31mÇIKIŞ\e[97m
 "
 echo
 echo
 echo
-read -p $'\e[31m──────────────[\e[32mANDROİD HACK\e[31m]───────►  \e[0m' secim
+read -e -p $'\e[31m───────[ \e[97mSEÇENEK GİRİNİZ\e[31m ]───────►  \e[0m' secim
 echo
 echo
 echo
@@ -32,7 +58,7 @@ if [[ $secim == 1 ]];then
 	echo
 	echo
 	echo
-	printf "[$Y*$B]$Y TROJAN APK OLUŞTURULDU.."
+	printf "\e[32m[✓] \e[97mTROJAN APK OLUŞTURULDU"
 	echo
 	echo
 	echo
@@ -47,7 +73,7 @@ elif [[ $secim == x || $secim == X ]];then
 	echo
 	echo
 	echo
-	printf "$K[!]$B ÇIKIŞ YAPILDI.."
+	printf "\e[31m[!] \e[97mÇIKIŞ YAPILDI"
 	echo
 	echo
 	echo
@@ -60,69 +86,12 @@ else
 	echo
 	echo
 	echo
-	printf "$K[!]$B HATALI SEÇİM $K!!!"
+	printf "\e[31m[!] \e[97mHATALI SEÇİM \e[31m!!!\e[97m"
 	echo
 	echo
 	echo
 	cd ..
 	sleep 1
 	bash Android-Hack.sh
-fi
-
-
-}
-
-########## KURULUM YAP ##########
-kurulum() {
-echo
-echo
-echo
-printf "[$Y*$B]$Y KURULUM YAPILIYOR..$B"
-echo
-echo
-sleep 1
-printf "[$Y*$B]$Y METASPLOİT-FRAMEWORK KURULUYOR..$B"
-echo
-echo
-sleep 1
-printf "[$Y*$B]$Y LÜTFEN BEKLEYİNİZ KURULUM BİRAZ UZUN SÜREBİLİR.."
-echo
-echo
-echo
-sleep 1
-apt update && apt upgrade -y
-
-pkg install wget -y && pkg install curl -y
-
-wget Auxilus.github.io/metasploit.sh
-
-bash metasploit.sh
-
-cd metasploit-framework
-
-cp msfconsole msfvenom /$PREFIX/bin
-cd ..
-
-rm -rf metasploit-framework
-
-chmod 777 $PREFIX/bin/*
-
-pkg install ruby -y
-
-gem install lolcat
-echo
-echo
-echo
-printf "[$Y*$B]$Y KURULUM TAMAMLANDI..$B"
-echo
-echo
-echo
-}
-
-
-if [[ -a /data/data/com.termux/files/usr/bin/msfconsole ]];then
-	menu
-else
-	kurulum
 fi
 
