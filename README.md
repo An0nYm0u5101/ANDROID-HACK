@@ -1,3 +1,3 @@
 Android-Hack
 
-Güncelleme 20.01.2021
+Güncelleme 21.01.2021
