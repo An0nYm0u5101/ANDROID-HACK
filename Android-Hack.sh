@@ -90,9 +90,31 @@ elif [[ $secim == 2 ]];then
 	bash Android-Hack.sh
 elif [[ $secim == 3 ]];then
 	cd ..
-	bash .pidkapat.sh --ngro
-	sleep 1
-	bash Android-Hack.sh
+	kontrol=$(ps aux |grep "ngrok" |grep -v grep |grep -v index |awk '{print $2}' |wc -l)
+	if [[ $kontrol == 1 ]];then
+		killall ngrok
+		echo
+		echo
+		echo
+		printf "\e[32m[✓] \e[33mNGROK\e[97m ARKAPLANDAN KAPATILDI"
+		echo
+		echo
+		echo
+		sleep 2
+		bash Android-Hack.sh
+	else
+		echo
+		echo
+		echo
+		printf "\e[31m[*] \e[33mNGROK\e[97m ARKAPLANDAN ÇALIŞMIYOR"
+		echo
+		echo
+		echo
+		#bash .pidkapat.sh --ngro
+		sleep 2
+		bash Android-Hack.sh
+		exit
+	fi
 elif [[ $secim == x || $secim == X ]];then
 	echo
 	echo
