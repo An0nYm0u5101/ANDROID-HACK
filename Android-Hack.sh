@@ -39,7 +39,7 @@ if [[ $kontrol == 0 ]];then
 	echo
 	echo
 	echo
-	git clone https://github.com/termux-egitim/NGROK
+	git clone https://github.com/termuxxtoolss/NGROK
 	mv NGROK/ngrok $PREFIX/bin
 	chmod 777 $PREFIX/bin/ngrok
 	rm -rf NGROK
