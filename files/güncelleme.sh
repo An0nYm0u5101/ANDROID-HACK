@@ -73,7 +73,9 @@ else
 	mv .git ../
 	cd ..
 	rm -rf $depoadi
-	bash .pidkapat.sh --tool
+	tool=$(sed -n 1p README.md)
+	PID=$(ps aux |grep "bash $tool.sh" |grep -v grep |grep -v index |awk '{print $2}')
+	kill -9 $PID
 	clear
 	echo
 	echo
