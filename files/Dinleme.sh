@@ -13,7 +13,10 @@ fi
 clear
 echo
 echo
-printf "\e[31m////////////////////\e[97m TROJAN DİNLEME \e[31m////////////////////\e[97m"
+echo
+echo
+printf "\e[32m████████████████████  \e[1;4;33mTROJAN DİNLEME\e[0;32m  █████████████████████\e[97m"
+echo
 echo
 echo
 echo
@@ -53,7 +56,8 @@ else
 	echo
 	echo
 	echo
-	sleep 2
+	sleep 3
 	cd ..
 	bash Android-Hack.sh
+	exit
 fi

