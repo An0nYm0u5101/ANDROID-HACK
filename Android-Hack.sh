@@ -106,11 +106,10 @@ elif [[ $secim == 3 ]];then
 		echo
 		echo
 		echo
-		printf "\e[31m[*] \e[33mNGROK\e[97m ARKAPLANDAN ÇALIŞMIYOR"
+		printf "\e[31m[*] \e[33mNGROK\e[97m ARKAPLANDA ÇALIŞMIYOR"
 		echo
 		echo
 		echo
-		#bash .pidkapat.sh --ngro
 		sleep 2
 		bash Android-Hack.sh
 		exit
