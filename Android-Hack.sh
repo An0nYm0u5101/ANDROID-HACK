@@ -30,22 +30,49 @@ if [[ $kontrol == 0 ]];then
 	echo
 	sleep 2
 fi
+#################### CURL ####################
+kontrol=$(which curl |wc -l)
+if [[ $kontrol == 0 ]];then
+	echo
+	echo
+	echo
+	printf "\e[32m[✓]\e[97m CURL PAKETİ KURLUYOR"
+	echo
+	echo
+	echo
+	pkg install curl -y
+fi
+#################### NGROK ####################
 kontrol=$(which ngrok |wc -l)
 if [[ $kontrol == 0 ]];then
 	echo
 	echo
 	echo
-	printf "\e[32m[✓]\e[97m NGROK KURULUYOR"
+	printf "\e[33m[*] \e[0mNGROK YÜKLENİYOR "
 	echo
 	echo
 	echo
-	git clone https://github.com/termuxxtoolss/NGROK
-	mv NGROK/ngrok $PREFIX/bin
-	chmod 777 $PREFIX/bin/ngrok
-	rm -rf NGROK
-	echo
-	echo
-	echo
+	git clone https://github.com/termuxxtoolss/ngrok
+	mv ngrok/ngrok /data/data/com.termux/files/usr/bin
+	chmod 777 /data/data/com.termux/files/usr/bin/ngrok
+	rm -rf ngrok
+else
+	kontrol=$(ngrok version |awk -F 'version ' {'print $2'})
+	if [[ $kontrol != 2.2.6 ]];then
+		rm $PREFIX/bin/ngrok
+		echo
+		echo
+		echo
+		printf "\e[33m[*] \e[0mNGROK YÜKLENİYOR "
+		echo
+		echo
+		echo
+		git clone https://github.com/termuxxtoolss/ngrok
+		mv ngrok/ngrok /data/data/com.termux/files/usr/bin
+		chmod 777 /data/data/com.termux/files/usr/bin/ngrok
+		rm -rf ngrok
+	fi
+
 fi
 kontrol=$(ls /sdcard |wc -m)
 if [[ $kontrol == 0 ]];then
