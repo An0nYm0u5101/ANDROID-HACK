@@ -65,11 +65,15 @@ if [[ $secim == 1 ]];then
 elif [[ $secim == 2 ]];then
 	tokenkontrol() {
 		if [[ -f $HOME/.ngrok2/ngrok.yml ]];then
+			pidkontrol=$(ps aux |grep "ngrok" |grep -v grep |grep -o ngrok)
+			if [[ $pidkontrol == ngrok ]];then
+				killall ngrok
+			fi
 			ngrok tcp 4444 > /dev/null &
 			echo
 			echo
 			echo
-			printf "\e[33m[*]\e[97m İP ADRESİ ADRESİ ALINIYOR"
+			printf "\e[33m[*]\e[97m NGROK TCP BİLGİLERİ ALINIYOR"
 			echo
 			echo
 			echo
@@ -155,6 +159,9 @@ elif [[ $secim == 2 ]];then
 			echo
 			read -e -p $'\e[31m───────[ \e[97mTOKEN GİRİNİZ\e[31m ]───────►  \e[0m' token
 			cd $HOME
+			echo
+			echo
+			echo
 			ngrok authtoken $token
 			cd -
 			echo
