@@ -115,6 +115,7 @@ elif [[ $secim == 2 ]];then
 	bash Dinleme.sh
 	exit
 elif [[ $secim == 3 ]];then
+	kapali() {
 	cd ..
 	kontrol=$(ps aux |grep "ngrok" |grep -v grep |grep -v index |awk '{print $2}' |wc -l)
 	if [[ $kontrol == 1 ]];then
@@ -140,6 +141,12 @@ elif [[ $secim == 3 ]];then
 		bash Android-Hack.sh
 		exit
 	fi
+}
+	bash pidkapat --tumu
+	sleep 2
+	cd ..
+	bash Android-Hack.sh
+	exit
 elif [[ $secim == x || $secim == X ]];then
 	echo
 	echo

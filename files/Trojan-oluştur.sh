@@ -74,7 +74,7 @@ if [[ $secim == 1 ]];then
 	fi
 elif [[ $secim == 2 ]];then
 	tokenkontrol() {
-		if [[ -f $HOME/.ngrok2/ngrok.yml ]];then
+		if [[ -a $HOME/.ngrok2/ngrok.yml ]];then
 			pidkontrol=$(ps aux |grep "ngrok" |grep -v grep |grep -o ngrok)
 			if [[ $pidkontrol == ngrok ]];then
 				killall ngrok
@@ -98,7 +98,6 @@ elif [[ $secim == 2 ]];then
 				echo
 				echo
 				rm $HOME/.ngrok2/ngrok.yml
-				tokenkontrol
 				exit
 			fi
 			echo
@@ -110,6 +109,7 @@ elif [[ $secim == 2 ]];then
 			echo
 			sleep 0.5
 			curl -s "http://localhost:4040/status" |grep -o tcp://[a-z.0-9.A-Z.:]\* > tcp
+			sleep 3
 			grep -o [0-9]\*.tcp.ngrok.io tcp > ağ.txt 
 			grep -o :[0-9]\* tcp |tr -d ":" >> ağ.txt
 			rm tcp
@@ -182,11 +182,11 @@ elif [[ $secim == 2 ]];then
 			echo
 			echo
 			sleep 0.5
-			tokenkontrol
 			exit
 		fi
 	}
-        tokenkontrol 
+        tokenkontrol
+	exit
 else
 	echo
 	echo

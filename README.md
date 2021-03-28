@@ -1,6 +1,6 @@
 Android-Hack
 
-Güncelleme 12.02.2021
+Güncelleme 28.03.2021
 
 GİTHUB    : https://github.com/termuxxtoolss
 
