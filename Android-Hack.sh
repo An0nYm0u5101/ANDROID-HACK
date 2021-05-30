@@ -1,50 +1,20 @@
 #!/bin/bash
-#Coded By = UmuT KaRa
-if [[ $1 == güncelle ]];then
-	cd files
-	bash güncelleme.sh güncelle
-	exit
-fi
-kontrol=$(which msfconsole |wc -l)
-if [[ $kontrol == 0 ]];then
+
+# CURL  PAKET KONTROLÜ #
+
+if [[ ! -a $PREFIX/bin/curl ]];then
 	echo
 	echo
 	echo
-	printf "\e[33m[*] \e[97mMETASPOLİT FRAMEWORK KURULUYOR"
-	echo
-	echo
-	echo
-	sleep 1
-	printf "\e[33m[*] \e[97mKURULUM BİRAZ UZUN SÜREBİLİR LÜTFEN BEKLEYİNİZ.."
-	echo
-	echo
-	echo
-	pkg install -y wget&&wget https://raw.githubusercontent.com/hax4us/metasploit_Termux/master/metasploit.sh&&chmod 777 metasploit.sh&&bash metasploit.sh
-	rm metasploit.sh
-	echo
-	echo
-	echo
-	printf "\e[32m[✓] \e[97mMETASPOLİT FRAMEWORK KURULUMU TAMAMLANDI"
-	echo
-	echo
-	echo
-	sleep 2
-fi
-#################### CURL ####################
-kontrol=$(which curl |wc -l)
-if [[ $kontrol == 0 ]];then
-	echo
-	echo
-	echo
-	printf "\e[32m[✓]\e[97m CURL PAKETİ KURLUYOR"
+	printf "\e[32m[✓]\e[97m CURL PAKETİ KURULUYOR"
 	echo
 	echo
 	echo
 	pkg install curl -y
 fi
-#################### NGROK ####################
-kontrol=$(which ngrok |wc -l)
-if [[ $kontrol == 0 ]];then
+# NGROK KONTROLÜ #
+
+if [[ ! -a $PREFIX/bin/ngrok ]];then
 	echo
 	echo
 	echo
@@ -52,38 +22,43 @@ if [[ $kontrol == 0 ]];then
 	echo
 	echo
 	echo
-	git clone https://github.com/termuxxtoolss/ngrok
-	mv ngrok/ngrok /data/data/com.termux/files/usr/bin
-	chmod 777 /data/data/com.termux/files/usr/bin/ngrok
-	rm -rf ngrok
-else
-	kontrol=$(ngrok version |awk -F 'version ' {'print $2'})
-	if [[ $kontrol != 2.2.6 ]];then
-		rm $PREFIX/bin/ngrok
-		echo
-		echo
-		echo
-		printf "\e[33m[*] \e[0mNGROK YÜKLENİYOR "
-		echo
-		echo
-		echo
-		git clone https://github.com/termuxxtoolss/ngrok
-		mv ngrok/ngrok /data/data/com.termux/files/usr/bin
-		chmod 777 /data/data/com.termux/files/usr/bin/ngrok
-		rm -rf ngrok
-	fi
-
+	git clone https://github.com/termuxxtoolss/ngrok-kurulum
+	cd ngrok-kurulum
+	bash ngrok-kurulum.sh
+	cd ..
+	rm -rf ngrok-kurulum
 fi
-kontrol=$(ls /sdcard |wc -m)
-if [[ $kontrol == 0 ]];then
+
+if [[ $1 == update ]];then
+	cd files
+	bash update.sh update $2
+	exit
+fi
+clear
+control=$(ls /sdcard |wc -m)
+if [[ $control == 0 ]];then
 	termux-setup-storage
 fi
 cd files
-bash güncelleme.sh
+bash update.sh
+if [[ -a ../updates_infos ]];then
+	rm ../updates_infos
+	exit
+fi
 bash banner.sh
+if [[ ! -a $PREFIX/bin/msfconsole ]];then
+	echo
+	echo
+	echo
+	printf "\e[33m[!] \e[97mMETASPOLİT FRAMEWORK KURULU DEĞİL"
+	echo
+	echo
+	echo
+	exit
+fi
 function finish() {
-	kontrol=$(ps aux |grep "ngrok" |grep -v grep |grep -o ngrok)
-	if [[ $kontrol == ngrok ]];then
+	control=$(ps aux |grep ngrok |grep -v grep |grep -o tcp)
+	if [[ -n $control ]];then
 		killall ngrok
 	fi
 	exit
@@ -115,10 +90,8 @@ elif [[ $secim == 2 ]];then
 	bash Dinleme.sh
 	exit
 elif [[ $secim == 3 ]];then
-	kapali() {
-	cd ..
-	kontrol=$(ps aux |grep "ngrok" |grep -v grep |grep -v index |awk '{print $2}' |wc -l)
-	if [[ $kontrol == 1 ]];then
+	control=$(ps aux | grep ngrok | grep -v grep |grep -o tcp)
+	if [[ -n $control ]];then
 		killall ngrok
 		echo
 		echo
@@ -127,26 +100,23 @@ elif [[ $secim == 3 ]];then
 		echo
 		echo
 		echo
-		sleep 2
+		sleep 1
+		cd ..
 		bash Android-Hack.sh
 	else
 		echo
 		echo
 		echo
-		printf "\e[31m[*] \e[33mNGROK\e[97m ARKAPLANDA ÇALIŞMIYOR"
+		printf "\e[33m[*] \e[33mNGROK\e[97m ARKAPLANDA ÇALIŞMIYOR"
 		echo
 		echo
 		echo
-		sleep 2
+		sleep 1
+		cd ..
 		bash Android-Hack.sh
-		exit
+
+
 	fi
-}
-	bash pidkapat --tumu
-	sleep 2
-	cd ..
-	bash Android-Hack.sh
-	exit
 elif [[ $secim == x || $secim == X ]];then
 	echo
 	echo

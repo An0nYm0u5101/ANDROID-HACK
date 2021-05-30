@@ -1,7 +1,5 @@
 Android-Hack
 
-Güncelleme 28.03.2021
-
 GİTHUB    : https://github.com/termuxxtoolss
 
 TELEGRAM  : https://t.me/termuxxtoolss
