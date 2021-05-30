@@ -1,6 +1,5 @@
 #!/bin/bash
-kontrol=$(which msfconsole |wc -l)
-if [[ $kontrol == 0 ]];then
+if [[ ! -a $PREFIX/bin/msfconsole ]];then
 	echo
 	echo
 	echo
@@ -21,10 +20,10 @@ echo
 echo
 echo
 sleep 0.5
-if [[ -a ağ.txt ]];then
-	ip=$(sed -n 1p ağ.txt)
-	kontrol=$(cat ağ.txt |wc -m)
-	if [[ $kontrol -gt 1 ]];then
+if [[ -a info ]];then
+	ip=$(sed -n 1p info)
+	control=$(cat info |wc -m)
+	if [[ $control -gt 1 ]];then
 		echo
 		echo
 		echo
