@@ -1,5 +1,50 @@
 #!/bin/bash
 
+# WGET  PAKET KONTROLÜ #
+
+if [[ ! -a $PREFIX/bin/wget ]];then
+	echo
+	echo
+	echo
+	printf "\e[32m[✓]\e[97m WGET PAKETİ KURULUYOR"
+	echo
+	echo
+	echo
+	pkg install wget -y
+fi
+
+# SCRİPTS CONTROLS
+
+if [[ ! -a files/update.sh ]];then
+	echo
+	echo
+	echo
+	printf "\e[32m[✓]\e[97m GEREKLİ SCRİPTLER KURULUYOR.."
+	echo
+	echo
+	echo
+
+	# UPDATE.SH ( GÜNCELLEME SCRİPTİ )
+
+	wget -O files/update.sh  https://raw.githubusercontent.com/termuxxtoolss/TERMUX-TOOLS/master/files/update.sh
+
+	# TERMUXTOOLSSMOD ( BİLDİRİM SCRİPTİ )
+
+	#wget -O $PREFIX/bin/termuxxtoolssmod  https://raw.githubusercontent.com/termuxxtoolss/TERMUX-TOOLS/master/files/commands/termuxxtoolssmod
+
+	# LİNK-CREATE ( LİNK OLUŞTURMA SCRİPTİ )
+
+	wget -O $PREFIX/bin/link-create https://raw.githubusercontent.com/termuxxtoolss/TERMUX-TOOLS/master/files/commands/link-create
+
+fi
+
+if [[ $1 == update ]];then
+	cd files
+	bash update.sh update $2
+	exit
+fi
+
+
 # CURL  PAKET KONTROLÜ #
 
 if [[ ! -a $PREFIX/bin/curl ]];then
@@ -29,22 +74,22 @@ if [[ ! -a $PREFIX/bin/ngrok ]];then
 	rm -rf ngrok-kurulum
 fi
 
-if [[ $1 == update ]];then
-	cd files
-	bash update.sh update $2
-	exit
-fi
 clear
 control=$(ls /sdcard |wc -m)
 if [[ $control == 0 ]];then
 	termux-setup-storage
 fi
 cd files
+
+##### UPDATE #####
+
 bash update.sh
 if [[ -a ../updates_infos ]];then
 	rm ../updates_infos
 	exit
 fi
+##################
+
 bash banner.sh
 if [[ ! -a $PREFIX/bin/msfconsole ]];then
 	echo
